@@ -2,6 +2,7 @@ package com.pinApp.customerManagement.controller;
 
 import com.pinApp.customerManagement.model.dto.ClientRequest;
 import com.pinApp.customerManagement.model.dto.ClientResponse;
+import com.pinApp.customerManagement.model.dto.MetricsResponse;
 import com.pinApp.customerManagement.service.ClientService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -34,5 +35,11 @@ public class ClientController {
     public ResponseEntity<List<ClientResponse>> getAllClients() {
         List<ClientResponse> clients = clientService.getAllClientsWithLifeExpectancy();
         return new ResponseEntity<>(clients, HttpStatus.OK);
+    }
+
+    @GetMapping("/metrics")
+    public ResponseEntity<MetricsResponse> getClientMetrics() {
+        MetricsResponse metrics = clientService.getClientMetrics();
+        return ResponseEntity.ok(metrics);
     }
 }

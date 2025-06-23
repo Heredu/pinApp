@@ -3,7 +3,9 @@ package com.pinApp.customerManagement.service;
 import com.pinApp.customerManagement.model.Client;
 import com.pinApp.customerManagement.model.dto.ClientRequest;
 import com.pinApp.customerManagement.model.dto.ClientResponse;
+import com.pinApp.customerManagement.model.dto.MetricsResponse;
 import com.pinApp.customerManagement.repository.ClientRepository;
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -50,5 +52,18 @@ public class ClientService {
 
     private LocalDate calculateLifeExpectancy(LocalDate birthDate) {
         return birthDate.plusYears(LIFE_EXPECTANCY);
+    }
+
+    public MetricsResponse getClientMetrics() {
+        List<Integer> ages = clientRepository.findAllAges();
+        DescriptiveStatistics stats = new DescriptiveStatistics();
+        ages.forEach(stats::addValue);
+
+        MetricsResponse response = new MetricsResponse();
+        response.setAverageAge(stats.getMean());
+        response.setStandardDeviation(stats.getStandardDeviation());
+        response.setTotalClients(stats.getN());
+
+        return response;
     }
 }
