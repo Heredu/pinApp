@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: mi-app-springboot
+    env: docker
+    plan: free
+    buildCommand: docker build -t springboot-java21 .
+    dockerfile: Dockerfile
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: production
+      - key: JAVA_TOOL_OPTIONS
+        value: "-XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0"
+    secrets:
+      - key: APP_ADMIN_USERNAME
+        value: $APP_ADMIN_USERNAME
+      - key: APP_ADMIN_PASSWORD
+        value: $APP_ADMIN_PASSWORD
+    healthCheckPath: /actuator/health
+    autoDeploy: true
