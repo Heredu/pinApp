@@ -61,8 +61,8 @@ public class ClientServiceImpl implements IClientService {
         ages.forEach(stats::addValue);
 
         MetricsResponse response = new MetricsResponse();
-        response.setAverageAge(stats.getMean());
-        response.setStandardDeviation(stats.getStandardDeviation());
+        response.setAverageAge(stats.getN() > 0 ? stats.getMean() : 0.0);
+        response.setStandardDeviation(stats.getN() > 0 ? stats.getStandardDeviation() : 0.0);
         response.setTotalClients(stats.getN());
 
         return response;
