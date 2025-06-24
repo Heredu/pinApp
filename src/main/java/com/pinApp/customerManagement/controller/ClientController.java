@@ -3,7 +3,8 @@ package com.pinApp.customerManagement.controller;
 import com.pinApp.customerManagement.model.dto.ClientRequest;
 import com.pinApp.customerManagement.model.dto.ClientResponse;
 import com.pinApp.customerManagement.model.dto.MetricsResponse;
-import com.pinApp.customerManagement.service.ClientService;
+import com.pinApp.customerManagement.service.IClientService;
+import com.pinApp.customerManagement.service.impl.ClientServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +20,10 @@ import java.util.List;
 @RequestMapping("/clients")
 public class ClientController {
 
-    private final ClientService clientService;
+    private final IClientService clientService;
 
-    public ClientController(ClientService clientService) {
-        this.clientService = clientService;
+    public ClientController(ClientServiceImpl clientServiceImpl) {
+        this.clientService = clientServiceImpl;
     }
 
     @PostMapping

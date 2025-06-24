@@ -1,10 +1,11 @@
-package com.pinApp.customerManagement.service;
+package com.pinApp.customerManagement.service.impl;
 
 import com.pinApp.customerManagement.model.Client;
 import com.pinApp.customerManagement.model.dto.ClientRequest;
 import com.pinApp.customerManagement.model.dto.ClientResponse;
 import com.pinApp.customerManagement.model.dto.MetricsResponse;
 import com.pinApp.customerManagement.repository.ClientRepository;
+import com.pinApp.customerManagement.service.IClientService;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Service
-public class ClientService {
+public class ClientServiceImpl implements IClientService {
 
     private static final int LIFE_EXPECTANCY = 100;
 
@@ -21,7 +22,7 @@ public class ClientService {
 
     ModelMapper modelMapper = new ModelMapper();
 
-    public ClientService(ClientRepository clientRepository) {
+    public ClientServiceImpl(ClientRepository clientRepository) {
         this.clientRepository = clientRepository;
     }
 
