@@ -1,5 +1,6 @@
 package com.pinApp.customerManagement.controller;
 
+import com.pinApp.customerManagement.config.IClientSwagger;
 import com.pinApp.customerManagement.model.dto.ClientRequest;
 import com.pinApp.customerManagement.model.dto.ClientResponse;
 import com.pinApp.customerManagement.model.dto.MetricsResponse;
@@ -18,7 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/clients")
-public class ClientController {
+public class ClientController implements IClientSwagger {
 
     private final IClientService clientService;
 

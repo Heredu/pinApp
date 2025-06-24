@@ -1,0 +1,23 @@
+package com.pinApp.customerManagement.config;
+
+import com.pinApp.customerManagement.model.Client;
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.media.Schema;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class OpenApiConfig {
+    @Bean
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI()
+                .info(new Info()
+                        .title("Customer Management PinApp")
+                        .version("1.0")
+                        .description("Client"))
+                .components(new Components()
+                        .addSchemas("Client", new Schema<Client>()));
+    }
+}
