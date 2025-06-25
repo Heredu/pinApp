@@ -31,6 +31,3 @@ services:
         value: RABBITMQ_PASSWORD
     healthCheckPath: /actuator/health
     autoDeploy: true
-    scaling:
-      minInstances: 1
-      maxInstances: 3
