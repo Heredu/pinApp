@@ -15,13 +15,19 @@ services:
       - key: MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED
         value: "true"
       - key: SPRING_RABBITMQ_HOST
-        value: rabbitmq
+        value: ${RABBITMQ_HOST}
+      - key: SPRING_RABBITMQ_USERNAME
+        value: ${RABBITMQ_USERNAME}
+      - key: SPRING_RABBITMQ_PASSWORD
+        value: ${RABBITMQ_PASSWORD}
     secrets:
       - key: APP_ADMIN_USERNAME
         value: $APP_ADMIN_USERNAME
       - key: APP_ADMIN_PASSWORD
         value: $APP_ADMIN_PASSWORD
     healthCheckPath: /actuator/health
+    dependsOn:
+      - rabbitmq
     autoDeploy: true
     scaling:
       minInstances: 1
@@ -32,8 +38,9 @@ services:
   - type: rabbitmq
     name: rabbitmq
     plan: free
+    healthCheckPath: /
     envVars:
       - key: RABBITMQ_DEFAULT_USER
-        value: $RABBITMQ_DEFAULT_USER
+        value: ${RABBITMQ_USERNAME}
       - key: RABBITMQ_DEFAULT_PASS
-        value: $RABBITMQ_DEFAULT_PASS
+        value: ${RABBITMQ_PASSWORD}
