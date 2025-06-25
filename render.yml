@@ -25,16 +25,18 @@ services:
       - key: MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED
         value: "true"
       - key: SPRING_RABBITMQ_HOST
-        value: ${RABBITMQ_HOST}
-      - key: SPRING_RABBITMQ_USERNAME
-        value: ${RABBITMQ_USERNAME}
-      - key: SPRING_RABBITMQ_PASSWORD
-        value: ${RABBITMQ_PASSWORD}
+        value: RABBITMQ_HOST
+      - key: SPRING_RABBITMQ_PORT
+        value: "5672"
     secrets:
       - key: APP_ADMIN_USERNAME
         value: $APP_ADMIN_USERNAME
       - key: APP_ADMIN_PASSWORD
         value: $APP_ADMIN_PASSWORD
+      - key: SPRING_RABBITMQ_USERNAME
+        value: RABBITMQ_USERNAME
+      - key: SPRING_RABBITMQ_PASSWORD
+        value: RABBITMQ_PASSWORD
     healthCheckPath: /actuator/health
     dependsOn:
       - rabbitmq
