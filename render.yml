@@ -1,4 +1,14 @@
 services:
+  - type: rabbitmq
+    name: rabbitmq
+    plan: free
+    healthCheckPath: /
+    envVars:
+      - key: RABBITMQ_DEFAULT_USER
+        value: ${RABBITMQ_USERNAME}
+      - key: RABBITMQ_DEFAULT_PASS
+        value: ${RABBITMQ_PASSWORD}
+
   - type: web
     name: mi-app-springboot
     env: docker
@@ -34,13 +44,3 @@ services:
       maxInstances: 3
       targetCpuUtilizationPercentage: 60
       targetMemoryUtilizationPercentage: 70
-
-  - type: rabbitmq
-    name: rabbitmq
-    plan: free
-    healthCheckPath: /
-    envVars:
-      - key: RABBITMQ_DEFAULT_USER
-        value: ${RABBITMQ_USERNAME}
-      - key: RABBITMQ_DEFAULT_PASS
-        value: ${RABBITMQ_PASSWORD}
