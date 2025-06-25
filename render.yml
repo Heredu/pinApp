@@ -10,6 +10,12 @@ services:
         value: production
       - key: JAVA_TOOL_OPTIONS
         value: "-XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0"
+      - key: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
+        value: "health,info,prometheus,metrics"
+      - key: MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED
+        value: "true"
+      - key: SPRING_RABBITMQ_HOST
+        value: rabbitmq
     secrets:
       - key: APP_ADMIN_USERNAME
         value: $APP_ADMIN_USERNAME
@@ -17,3 +23,17 @@ services:
         value: $APP_ADMIN_PASSWORD
     healthCheckPath: /actuator/health
     autoDeploy: true
+    scaling:
+      minInstances: 1
+      maxInstances: 3
+      targetCpuUtilizationPercentage: 60
+      targetMemoryUtilizationPercentage: 70
+
+  - type: rabbitmq
+    name: rabbitmq
+    plan: free
+    envVars:
+      - key: RABBITMQ_DEFAULT_USER
+        value: $RABBITMQ_DEFAULT_USER
+      - key: RABBITMQ_DEFAULT_PASS
+        value: $RABBITMQ_DEFAULT_PASS
