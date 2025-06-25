@@ -26,9 +26,5 @@ services:
         value: APP_ADMIN_USERNAME
       - key: APP_ADMIN_PASSWORD
         value: APP_ADMIN_PASSWORD
-      - key: SPRING_RABBITMQ_USERNAME
-        value: RABBITMQ_USERNAME
-      - key: SPRING_RABBITMQ_PASSWORD
-        value: RABBITMQ_PASSWORD
     healthCheckPath: /actuator/health
     autoDeploy: true
