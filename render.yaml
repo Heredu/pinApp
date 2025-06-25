@@ -2,19 +2,13 @@ services:
   - type: redis
     name: my-redis
     plan: free
-    healthCheckPath: /
-    envVars:
-      - key: RABBITMQ_DEFAULT_USER
-        value: RABBITMQ_USERNAME
-      - key: RABBITMQ_DEFAULT_PASS
-        value: RABBITMQ_PASSWORD
-
+    ipAllowList:
+    - source: "0.0.0.0/0"
   - type: web
     name: mi-app-springboot
     env: docker
     plan: free
     buildCommand: docker build -t springboot-java21 .
-    dockerfile: Dockerfile
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: production
@@ -28,7 +22,6 @@ services:
         value: RABBITMQ_HOST
       - key: SPRING_RABBITMQ_PORT
         value: "5672"
-    secrets:
       - key: APP_ADMIN_USERNAME
         value: APP_ADMIN_USERNAME
       - key: APP_ADMIN_PASSWORD
@@ -38,11 +31,4 @@ services:
       - key: SPRING_RABBITMQ_PASSWORD
         value: RABBITMQ_PASSWORD
     healthCheckPath: /actuator/health
-    dependsOn:
-      - rabbitmq
     autoDeploy: true
-    scaling:
-      minInstances: 1
-      maxInstances: 3
-      targetCpuUtilizationPercentage: 60
-      targetMemoryUtilizationPercentage: 70
