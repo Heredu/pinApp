@@ -3,7 +3,7 @@ services:
     name: my-redis
     plan: free
     ipAllowList:
-      - 0.0.0.0/0
+    - 0.0.0.0/0
   - type: web
     name: mi-app-springboot
     env: docker
