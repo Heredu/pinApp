@@ -1,8 +1,6 @@
 services:
-  - type: background
-    name: rabbitmq-service
-    env: docker
-    dockerfilePath: Dockerfile.rabbitmq
+  - type: redis
+    name: my-redis
     plan: free
     healthCheckPath: /
     envVars:
