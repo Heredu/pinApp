@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,7 @@ public interface IClientSwagger {
     @Operation(
             summary = "Crear nuevo cliente",
             description = "Registra un nuevo cliente en el sistema con validación de datos",
+            security = @SecurityRequirement(name = "bearerAuth"),
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     description = "Datos del cliente a crear",
                     required = true,
@@ -89,7 +91,8 @@ public interface IClientSwagger {
 
     @Operation(
             summary = "Obtener todos los clientes",
-            description = "Retorna una lista paginada de todos los clientes registrados con sus datos completos, incluyendo cálculo de expectativa de vida basado en su fecha de nacimiento"
+            description = "Retorna una lista paginada de todos los clientes registrados con sus datos completos, incluyendo cálculo de expectativa de vida basado en su fecha de nacimiento",
+            security = @SecurityRequirement(name = "bearerAuth")
     )
     @ApiResponse(
             responseCode = "200",
@@ -129,7 +132,8 @@ public interface IClientSwagger {
 
     @Operation(
             summary = "Obtener métricas avanzadas de clientes",
-            description = "Calcula y retorna estadísticas detalladas sobre la base de clientes"
+            description = "Calcula y retorna estadísticas detalladas sobre la base de clientes",
+            security = @SecurityRequirement(name = "bearerAuth")
     )
     @ApiResponse(
             responseCode = "200",
