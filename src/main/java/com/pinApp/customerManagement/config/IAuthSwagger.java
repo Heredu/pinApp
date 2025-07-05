@@ -26,8 +26,8 @@ public interface IAuthSwagger {
                             examples = @ExampleObject(
                                     value = """
                         {
-                            "username": "admin",
-                            "password": "admin123"
+                            "username": "pinApp",
+                            "password": "pinApp123"
                         }
                         """
                             )
